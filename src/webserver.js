@@ -1,6 +1,6 @@
-const express = require("express");
+import express from "express";
 
-module.exports = (sharder) => {
+export default function (sharder) {
     const app = express();
 
     app.get("/ping", (req, res) => {
