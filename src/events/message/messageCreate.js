@@ -31,7 +31,6 @@ export default async (bot, message) => {
                 const botperms = message.guild.me.permissions;
                 const botchannelperms = message.channel.permissionsFor(bot.user.id);
                 
-                console.log(command)
                 if (message.author.id !== "883720498272403516") {
                     if (!userperms.has(command.permissions.user[0])) return message.channel.send("No tienes los permisos necesarios para usar este comando...\nPermisos requeridos:\n`" + (!(new Discord.Permissions(command.permissions.user[0]).has(8n)) ? (new Discord.Permissions(command.permissions.user[0]).toArray().join(", ") || "None") : "ADMINISTRATOR") + "`");
 

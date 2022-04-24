@@ -3,11 +3,11 @@ import express from "express";
 export default function (sharder) {
     const app = express();
 
-    app.get("/ping", (req, res) => {
+    app.get("/", (req, res) => {
         res.send("Aquí está todo bien...");
     });
 
-    app.get("/hi", (req, res) => {
+    app.get("/ping", (req, res) => {
         res.send("Hi!");
     });
 

@@ -12,7 +12,6 @@ const sweepInterval = 1800;
 // Bot
 const bot = new Discord.Client({
     intents: 32511,
-    partials: ["MESSAGE", "REACTION", "CHANNEL", "GUILD_MEMBER", "USER", "GUILD_SCHEDULED_EVENT"],
     makeCache: Discord.Options.cacheWithLimits({
         GuildScheduledEventManager: 0,
         ApplicationCommandManager: 0,
@@ -42,7 +41,6 @@ const bot = new Discord.Client({
           interval: sweepInterval,
           filter: () => (member) => {
             if (member.id === bot.user.id) return false;
-            if (member.voice.channelId && bot.distube.voices.collection.some(e => e.channel.id === member.voice.channelId)) return false;
             if (member.pending) return false;
             return true;
           }
@@ -51,7 +49,6 @@ const bot = new Discord.Client({
           interval: sweepInterval,
           filter: () => (user) => {
             if (user.id === bot.user.id) return false;
-            if (user.mine) return false;
             return true;
           }
         }
@@ -62,7 +59,7 @@ const bot = new Discord.Client({
     restGlobalRateLimit: 50
 });
 
-bot.botVersion = "0.0.1";
+bot.botVersion = "1.0.0";
 bot.config = {
     color: "random"
 };
@@ -79,7 +76,6 @@ bot.config = {
 // Posibles errores
 process.on("unhandledRejection", error => {
     console.error("Unhandled promise rejection:", error);
-    //This will be useful to finding unknown errors sometimes
     if (error.requestData?.json) console.error(inspect(error.requestData.json, { depth: 5 }));
 });
   
