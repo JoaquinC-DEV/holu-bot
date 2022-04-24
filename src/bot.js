@@ -61,7 +61,7 @@ const bot = new Discord.Client({
 
 bot.botVersion = "1.0.0";
 bot.config = {
-    color: "random"
+    color: "#219ebc"
 };
 
 (async () => {

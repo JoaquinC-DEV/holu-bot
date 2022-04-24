@@ -32,14 +32,14 @@ export default async (bot, message) => {
                 const botchannelperms = message.channel.permissionsFor(bot.user.id);
                 
                 if (message.author.id !== "883720498272403516") {
-                    if (!userperms.has(command.permissions.user[0])) return message.channel.send("No tienes los permisos necesarios para usar este comando...\nPermisos requeridos:\n`" + (!(new Discord.Permissions(command.permissions.user[0]).has(8n)) ? (new Discord.Permissions(command.permissions.user[0]).toArray().join(", ") || "None") : "ADMINISTRATOR") + "`");
+                    if (!userperms.has(command.permissions.user[0])) return message.channel.send("No tienes los permisos necesarios para usar este comando...\nPermisos requeridos:\n`" + (!(new Discord.Permissions(command.permissions.user[0]).has(8n)) ? (new Discord.Permissions(command.permissions.user[0]).toArray().join(", ") || "Ninguno") : "ADMINISTRATOR") + "`");
 
-                    if (!userchannelperms.has(command.permissions.user[1])) return message.channel.send("No tienes los permisos necesarios para usar este comando **en este canal**.\nPermisos requeridos:\n`" + (!(new Discord.Permissions(command.permissions.user[1]).has(8n)) ? (new Discord.Permissions(command.permissions.user[1]).toArray().join(", ") || "None") : "ADMINISTRATOR") + "`");
+                    if (!userchannelperms.has(command.permissions.user[1])) return message.channel.send("No tienes los permisos necesarios para usar este comando **en este canal**.\nPermisos requeridos:\n`" + (!(new Discord.Permissions(command.permissions.user[1]).has(8n)) ? (new Discord.Permissions(command.permissions.user[1]).toArray().join(", ") || "Ninguno") : "ADMINISTRATOR") + "`");
                 }
 
-                if (!botperms.has(command.permissions.bot[0])) return message.channel.send("Vaya... No tengo los permisos suficientes para ejecutar este comando.\nPermisos requeridos:\n`" + (!(new Discord.Permissions(command.permissions.bot[0]).has(8n)) ? (new Discord.Permissions(command.permissions.bot[0]).toArray().join(", ") || "None") : "ADMINISTRATOR") + "`");
+                if (!botperms.has(command.permissions.bot[0])) return message.channel.send("Vaya... No tengo los permisos suficientes para ejecutar este comando.\nPermisos requeridos:\n`" + (!(new Discord.Permissions(command.permissions.bot[0]).has(8n)) ? (new Discord.Permissions(command.permissions.bot[0]).toArray().join(", ") || "Ninguno") : "ADMINISTRATOR") + "`");
 
-                if (!botchannelperms.has(command.permissions.bot[1])) return message.channel.send("Vaya... No tengo los permisos suficientes para ejecutar este comando **en este canal**.\nPermisos requeridos:\n`" + (!(new Discord.Permissions(command.permissions.bot[1]).has(8n)) ? (new Discord.Permissions(command.permissions.bot[1]).toArray().join(", ") || "None") : "ADMINISTRATOR") + "`");
+                if (!botchannelperms.has(command.permissions.bot[1])) return message.channel.send("Vaya... No tengo los permisos suficientes para ejecutar este comando **en este canal**.\nPermisos requeridos:\n`" + (!(new Discord.Permissions(command.permissions.bot[1]).has(8n)) ? (new Discord.Permissions(command.permissions.bot[1]).toArray().join(", ") || "Ninguno") : "ADMINISTRATOR") + "`");
             }
 
             try {

@@ -19,7 +19,7 @@ export default class Command {
         this.owner = false;
         // solo puede ser utilizado por los desarrolladores
         this.dev = false;
-        // si aparece en el comando help o nombre
+        // si aparece en el comando help o no
         this.secret = false;
     }
 
