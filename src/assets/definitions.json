@@ -7,6 +7,10 @@
       "name": "Comandos de desarrollador",
       "secret": true
     },
+    "perfiles": {
+      "name": "Comandos de los perfiles globales",
+      "secret": false
+    },
     "test": {
       "name": "Comandos de prueba",
       "secret": true
