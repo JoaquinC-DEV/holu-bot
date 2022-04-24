@@ -5,6 +5,7 @@ export default class Command {
 
         // se obtiene del nombre del archivo del comando
         this.name = opciones.name;
+        this.uso = `d/${opciones.name}`;
         // se obtiene del nombre de la carpeta del comando
         this.category = opciones.category;
         // siempre debe ser un array

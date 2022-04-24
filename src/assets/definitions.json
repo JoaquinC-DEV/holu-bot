@@ -1,0 +1,14 @@
+{
+    "bot": {
+      "name": "Comandos de información sobre el bot",
+      "secret": false
+    },
+    "dev": {
+      "name": "Comandos de desarrollador",
+      "secret": true
+    },
+    "test": {
+      "name": "Comandos de prueba",
+      "secret": true
+    }
+}

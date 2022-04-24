@@ -8,6 +8,7 @@ export default class extends Command {
         this.secret = true;
         this.description = "Ejecuta scripts rápidamente.";
         this.dev = true;
+        this.uso = "d/eval [script]";
     }
 
     async run (bot, message, args) {
