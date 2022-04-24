@@ -4,10 +4,9 @@ export default class extends Command {
         this.aliases = ["prueba"];
         this.secret = true;
         this.description = "Este es un comando de prueba";
-        this.dev = true;
     }
 
-    run (bot, message) {
+    run (bot, message, args) {
         return message.channel.send("El comando funciona!");
     }
 }
