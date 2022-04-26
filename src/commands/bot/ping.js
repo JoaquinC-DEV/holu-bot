@@ -6,6 +6,6 @@ export default class extends Command {
     }
 
     run (bot, message, args) {
-        message.channel.send(`📡 **Discord API**: ${bot.ws.ping}\n📨 **Mensajes**: ${Math.floor(message.createdTimestamp - Date.now())}`);
+        message.channel.send(`📡 **Discord API**: ${bot.ws.ping}\n📨 **Mensajes**: ${Math.floor(Date.now() - message.createdTimestamp)}`);
     }
 }
