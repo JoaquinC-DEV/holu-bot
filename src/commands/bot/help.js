@@ -1,10 +1,11 @@
-import def from "../../assets/definitions.json" assert {type: "json"};
+import def from "../../assets/definitions.json";
 import Discord from "discord.js";
 const buttons = [
   new Discord.MessageButton().setLabel("Soporte").setStyle("LINK").setURL("https://discord.gg/M35kV5Ez3v"),
   new Discord.MessageButton().setLabel("GitHub").setStyle("LINK").setURL("https://github.com/JoaquinC-DEV/diamond-bot"),
 ];
-const action = Discord.MessageActionRow.prototype.addComponents.apply(new Discord.MessageActionRow(), buttons)
+const action = Discord.MessageActionRow.prototype.addComponents.apply(new Discord.MessageActionRow(), buttons);
+
 export default class extends Command {
     constructor(options) {
         super(options);
@@ -38,7 +39,7 @@ export default class extends Command {
             if (s.secret) return false
             return true
           }).map(s => "**" + s.name + "**: " + s.description).join("\n"))[0])
-          .setTimestamp()
+          .setTimestamp();
 
           message.channel.send({ embeds: [embed], components: [new Discord.MessageActionRow().addComponents(buttons[1])] });
       } else {
