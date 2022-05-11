@@ -7,6 +7,9 @@ import { registerCommands, registerEvents } from "./utils/registry.js";
 import Discord from "discord.js-light";
 import { inspect } from 'util';
 
+// Models
+import profiles from "./database/models/profile.js";
+
 const sweepInterval = 1800;
 
 // Bot
@@ -64,7 +67,7 @@ bot.config = {
     color: "#219ebc"
 };
 bot.models = {
-  profiles: import("./database/models/profile.js"),
+  profiles
 };
 
 (async () => {

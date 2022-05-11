@@ -9,7 +9,7 @@ const action = Discord.MessageActionRow.prototype.addComponents.apply(new Discor
 export default class extends Command {
     constructor(options) {
         super(options);
-        this.aliases = ["h"];
+        this.aliases = ["h", "comandos", "commands", "ayuda"];
         this.description = "Comando de ayuda";
         this.uso = "d/help <categoría/comando>";
     }
