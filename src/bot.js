@@ -63,6 +63,9 @@ bot.botVersion = "1.0.0";
 bot.config = {
     color: "#219ebc"
 };
+bot.models = {
+  profiles: import("./database/models/profile.js")
+}
 
 (async () => {
     bot.commands = new Discord.Collection();
