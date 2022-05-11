@@ -14,7 +14,7 @@ class ErrorCommand extends Command {
     }
 
     async run(bot, message) {
-      await message.channel.send("El comando no fué cargado correctamente debido al siguiente error: " + this.error);
+      await message.channel.send(`El comando no fué cargado correctamente debido al siguiente error: \`${this.error}\`\n Por favor informa sobre este error en mi servidor de soporte: https://discord.gg/M35kV5Ez3v`);
     }
 }
 
