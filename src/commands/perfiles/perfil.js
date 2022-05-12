@@ -31,7 +31,7 @@ export default class extends Command {
                     msg.awaitReactions((reaction, user) => {
                         if (user.id !== message.author.id) return;
                         if (reaction.emoji.name === "✅") {
-                            reaction.user.remove(user);
+                            msg.reactions.removeAll();
                             msg.edit("Creando tu perfil...");
 
                             const nuevoPerfil = new bot.models.profiles({
@@ -52,9 +52,10 @@ export default class extends Command {
                             nuevoPerfil.save()
                             .then(() => msg.edit("¡Tu perfil ha sido creado con exito! ;)"))
                             .catch((err) => msg.edit(`Ocurrió un error al crear tu perfil: \`${err}\`. Informalo en mi servidor de soporte (comando support)`));
-                            
-                        } else if (reaction.emoji.name === "❌") {
 
+                        } else if (reaction.emoji.name === "❌") {
+                            msg.reactions.removeAll();
+                            msg.edit("Operación cancelada...");
                         }
                     });
                 });
