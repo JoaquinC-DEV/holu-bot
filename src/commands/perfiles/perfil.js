@@ -23,6 +23,43 @@ export default class extends Command {
 
             return message.channel.send({ embeds: [embedPerfil] });
         } else {
+            if (usuario.id === message.author.id) {
+                message.channel.send(`${message.author.toString()}, no tienes un perfil creado... **¿Deseas crearte uno?`).then((msg) => {
+                    msg.react(`✅`);
+                    msg.react(`❌`);
+
+                    msg.awaitReactions((reaction, user) => {
+                        if (user.id !== message.author.id) return;
+                        if (reaction.emoji.name === "✅") {
+                            reaction.user.remove(user);
+                            msg.edit("Creando tu perfil...");
+
+                            const nuevoPerfil = new bot.models.profiles({
+                                user_id: message.author.id,
+                                profile_description: "",
+                                profile_createdAt: Date.now(),
+                                profile_xp: 10,
+                                profile_lvl: 1,
+                                profile_friends: [],
+                                profile_money: {
+                                    coins: 100,
+                                    diamonds: 0
+                                },
+                                profile_badges: [],
+                                profile_premium: false
+                            });
+
+                            nuevoPerfil.save()
+                            .then(() => msg.edit("¡Tu perfil ha sido creado con exito! ;)"))
+                            .catch((err) => msg.edit(`Ocurrió un error al crear tu perfil: \`${err}\`. Informalo en mi servidor de soporte (comando support)`));
+                            
+                        } else if (reaction.emoji.name === "❌") {
+
+                        }
+                    });
+                });
+            }
+
             return message.channel.send(`**${usuario.tag}** no tiene un perfil creado...`);
         }
     }
