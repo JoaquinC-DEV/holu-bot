@@ -12,6 +12,7 @@ export default function (sharder) {
         res.send("Hi!");
     });
 
+    /* F
     app.get("/profiles/:profileID", async (req, res) => {
         if (isNaN(req.params.profileID) && req.params.profileID.length !== 18) {
             res.status(400).send("La sintaxis de la ID está mal...");
@@ -27,6 +28,7 @@ export default function (sharder) {
             }
         }
     });
+    */
 
     const listener = app.listen(process.env.PORT, () => {
         console.log("Express server listening in port " + listener.address().port);
