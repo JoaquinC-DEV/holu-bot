@@ -12,11 +12,11 @@ export default function (sharder) {
         res.send("Hi!");
     });
 
-    app.get("/profiles/:profileID", (req, res) => {
+    app.get("/profiles/:profileID", async (req, res) => {
         if (isNaN(req.params.profileID) && req.params.profileID.length !== 18) {
             res.status(400).send("La sintaxis de la ID está mal...");
         } else {
-            const profile = profiles.findOne({ user_id: req.params.profileID });
+            const profile = await profiles.findOne({ user_id: req.params.profileID });
             if (profile) {
                 res.send({
                     user_id: profile.user_id,
