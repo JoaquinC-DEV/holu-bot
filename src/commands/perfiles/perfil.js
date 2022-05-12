@@ -1,3 +1,5 @@
+import Discord from "discord.js";
+import duration from "../../utils/humanize.js";
 export default class extends Command {
     constructor(options) {
         super(options);
@@ -15,6 +17,7 @@ export default class extends Command {
             const embedPerfil = new Discord.MessageEmbed()
             .setTitle(`Perfil de ${usuario.tag}`)
             .setThumbnail(usuario.displayAvatarURL({ dynamic: true }))
+            .addField("Perfil creado hace", `${duration(perfil.profile_createdAt)}`)
             .setFooter(`${perfil.profile_description || "Sin descripción..."}`)
             .setColor(bot.config.color);
 
