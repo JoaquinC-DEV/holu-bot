@@ -24,13 +24,16 @@ export default class extends Command {
             return message.channel.send({ embeds: [embedPerfil] });
         } else {
             if (usuario.id === message.author.id) {
-                message.channel.send(`${message.author.toString()}, no tienes un perfil creado... **¿Deseas crearte uno?`).then((msg) => {
+                message.channel.send(`${message.author.toString()}, no tienes un perfil creado... **¿Deseas crearte uno?**`).then(async (msg) => {
                     msg.react(`✅`);
                     msg.react(`❌`);
 
-                    msg.awaitReactions((reaction, user) => {
-                        if (user.id !== message.author.id) return;
+                    await msg.awaitReactions((reaction, user) => {
+                      console.log("awaitReactions funciona xd");
+                        if (message.author.id !== user.id) return;
                         if (reaction.emoji.name === "✅") {
+                            console.log("xd");
+                            
                             msg.reactions.removeAll();
                             msg.edit("Creando tu perfil...");
 
@@ -59,9 +62,9 @@ export default class extends Command {
                         }
                     });
                 });
+            } else {  
+            message.channel.send(`**${usuario.tag}** no tiene un perfil creado...`);
             }
-
-            return message.channel.send(`**${usuario.tag}** no tiene un perfil creado...`);
         }
     }
 }

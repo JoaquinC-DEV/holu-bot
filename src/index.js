@@ -21,6 +21,7 @@ manager.spawn({
 });
 
 /* Logs */
+import logging from './utils/logs.js';
 const logs = new Discord.WebhookClient({
 	id: "979410189843308614",
 	token: process.env.LOGS_TOKEN
@@ -33,5 +34,8 @@ manager.on("shardCreate", (shard) => {
 	let logMsg = `¡One shard launched! (${shard.id + 1}/${manager.totalShards})`;
 
 	console.log(logMsg);
-	logs.send(logMsg + ` (${logDate})`);
+	logging(logMsg, {
+		type: "correct",
+		category: "shards"
+	});
 });

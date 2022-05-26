@@ -39,11 +39,17 @@ export async function registerCommands(bot, dir) {
 
                     bot.commands.set(cmdName, cmdClass);
                     console.log(`Command ${cmdName} loaded :D`);
-                    bot.logs.send(`Command ${cmdName} loaded :D`);
+                    bot.sendLogs(`Command ${cmdName} loaded :D`, {
+                        type: "correct",
+                        category: "bot"
+                    });
                 } catch (err) {
                     process.exitCode = 1;
                     console.error("Hubo un error cargando el comando " + cmdName + ":\n", err);
-                    bot.logs.send("Hubo un error cargando el comando " + cmdName + ":\n", err);
+                    bot.sendLogs(`Hubo un error cargando el comando "${cmdName}": \n \`\`\`${err}\`\`\``, {
+                        type: "error",
+                        category: "bot"
+                    });
                     bot.commands.set(cmdName, new ErrorCommand({
                         name: cmdName, category, err
                     }));
@@ -70,11 +76,17 @@ export async function registerEvents(bot, dir) {
 
                     bot.on(eventName, eventModule.default.bind(null, bot));
                     console.log(`Event ${eventName} loaded =D`);
-                    bot.logs.send(`Event ${eventName} loaded =D`);
-                }
-                catch(err) {
+                    bot.sendLogs(`Event ${eventName} loaded =D`, {
+                        type: "correct",
+                        category: "bot"
+                    });
+                } catch(err) {
                     process.exitCode = 1;
-                    console.log(err);
+                    console.log(`Hubo un error cargando el evento ${eventName}: `, err);
+                    bot.sendLogs(`Hubo un error al cargar el **evento** "${eventName}":\n \`\`\`${err}\`\`\``, {
+                        type: "error",
+                        category: "bot"
+                    });
                 }
             }
         }

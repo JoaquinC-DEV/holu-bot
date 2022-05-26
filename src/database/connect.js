@@ -10,10 +10,16 @@ export default function (logs) {
     })
     .then(() => {
         console.log("Connected to the database");
-        logs.send("Connected to DB");
+        logs("Connected to DB", {
+            type: "correct",
+            category: "db"
+        });
     })
     .catch((err) => {
         console.log("Ocurrió un error al conectarse a la DB: " + err);
-        logs.send("Ocurrió un error al conectarse a la DB: " + err);
+        logs(`Ocurrió un error al conectarse a la DB:\n \`\`\`${err}\`\`\``, {
+            type: "error",
+            category: "db"
+        });
     });
 }

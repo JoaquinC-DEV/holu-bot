@@ -70,12 +70,16 @@ bot.models = {
   profiles
 };
 
+/* Logs */
+import logging from "./utils/logs.js";
+
 const logs = new Discord.WebhookClient({
 	id: "979410189843308614",
 	token: process.env.LOGS_TOKEN
 });
 
 bot.logs = logs;
+bot.sendLogs = logging;
 
 (async () => {
     bot.commands = new Discord.Collection();
