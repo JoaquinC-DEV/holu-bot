@@ -7,20 +7,19 @@ const execArgv = ["--experimental-json-modules", "--expose-gc", "--optimize_for_
 const manager = new Discord.ShardingManager("./src/bot.js", {
 	token: process.env.DISCORD_TOKEN,
 	totalShards: parseInt(process.env.SHARDS_WANTED) || "auto",
+	respawn: true,
 	execArgv
 });
 
-manager.on("shardCreate", (shard) => {
-	console.log(`Launched shard ${shard.id}`);
-
-	shard.on("ready", () => {
-		console.log(`Shard ${shard.id} ready`);
-	});
-
-	shard.on("death", () => {
-		console.log(`Shard ${shard.id} is death`);
-	});
-});
-manager.spawn({ timeout: Infinity }).then(() => {
+manager.spawn({
+	timeout: Infinity,
+	delay: 500,
+	amount: manager.totalShards
+})
+.then(() => {
 	webserver(manager);
+});
+
+manager.on("shardCreate", (shard) => {
+	console.log(`Launched shard ${shard.id + 1}/${manager.totalShards}`);
 });
