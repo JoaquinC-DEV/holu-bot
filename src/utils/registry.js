@@ -39,9 +39,11 @@ export async function registerCommands(bot, dir) {
 
                     bot.commands.set(cmdName, cmdClass);
                     console.log(`Command ${cmdName} loaded :D`);
+                    bot.logs.send(`Command ${cmdName} loaded :D`);
                 } catch (err) {
                     process.exitCode = 1;
                     console.error("Hubo un error cargando el comando " + cmdName + ":\n", err);
+                    bot.logs.send("Hubo un error cargando el comando " + cmdName + ":\n", err);
                     bot.commands.set(cmdName, new ErrorCommand({
                         name: cmdName, category, err
                     }));
@@ -68,6 +70,7 @@ export async function registerEvents(bot, dir) {
 
                     bot.on(eventName, eventModule.default.bind(null, bot));
                     console.log(`Event ${eventName} loaded =D`);
+                    bot.logs.send(`Event ${eventName} loaded =D`);
                 }
                 catch(err) {
                     process.exitCode = 1;
