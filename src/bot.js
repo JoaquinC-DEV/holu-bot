@@ -70,6 +70,13 @@ bot.models = {
   profiles
 };
 
+const logs = new Discord.WebhookClient({
+	id: "979410189843308614",
+	token: process.env.LOGS_TOKEN
+});
+
+bot.logs = logs;
+
 (async () => {
     bot.commands = new Discord.Collection();
     bot.cachedMessageReactions = new Discord.Collection();

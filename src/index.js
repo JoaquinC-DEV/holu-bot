@@ -20,6 +20,18 @@ manager.spawn({
 	webserver(manager);
 });
 
+/* Logs */
+const logs = new Discord.WebhookClient({
+	id: "979410189843308614",
+	token: process.env.LOGS_TOKEN
+});
+
+const time = new Date();
+const logDate = `${time.getHours()}:${time.getMinutes()}, ${time.getDate()}/${time.getMonth() + 1}/${time.getFullYear()} UTC`;
+
 manager.on("shardCreate", (shard) => {
-	console.log(`Launched shard ${shard.id + 1}/${manager.totalShards}`);
+	let logMsg = `¡One shard launched! (${shard.id + 1}/${manager.totalShards})`;
+
+	console.log(logMsg);
+	logs.send(logMsg + ` (${logDate})`);
 });
