@@ -46,9 +46,7 @@ export default class extends Command {
                 .catch((err) => {
                     return message.channel.send(`**${message.author.tag}**, ocurrió un error al crear tu perfil: \`${err}\`. Informalo en mi servidor de soporte (comando support)`);
                 });
-            }
-
-            if (usuario.id === message.author.id) {
+            } else if (usuario.id === message.author.id) {
                 message.channel.send(`${message.author.toString()}, no tienes un perfil creado... **¿Deseas crearte uno?**\n> Utiliza el comando \`d/perfil crear\`.`);
             } else {  
                 message.channel.send(`**${usuario.tag}** no tiene un perfil creado...`);
