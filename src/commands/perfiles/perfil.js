@@ -26,7 +26,7 @@ export default class extends Command {
             if (usuario.id === message.author.id && args[1] === "crear") {
                 const nuevoPerfil = new bot.models.profiles({
                     user_id: message.author.id,
-                    profile_description: "",
+                    profile_description: "Sin descripción",
                     profile_createdAt: Date.now(),
                     profile_xp: 10,
                     profile_lvl: 1,
@@ -40,8 +40,12 @@ export default class extends Command {
                 });
 
                 nuevoPerfil.save()
-                .then(() => message.channel.send(`¡**${message.author.tag}**, tu perfil ha sido creado con exito! ;)`))
-                .catch((err) => message.channel.send(`**${message.author.tag}**, ocurrió un error al crear tu perfil: \`${err}\`. Informalo en mi servidor de soporte (comando support)`));
+                .then(() => {
+                    return message.channel.send(`¡**${message.author.tag}**, tu perfil ha sido creado con exito! ;)`);
+                })
+                .catch((err) => {
+                    return message.channel.send(`**${message.author.tag}**, ocurrió un error al crear tu perfil: \`${err}\`. Informalo en mi servidor de soporte (comando support)`);
+                });
             }
 
             if (usuario.id === message.author.id) {
