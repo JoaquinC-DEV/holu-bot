@@ -14,7 +14,7 @@ export default class extends Command {
         .setThumbnail(bot.user.displayAvatarURL())
         .setColor(bot.config.color)
         .setTimestamp()
-        .setFooter("Si tienes problemas para invitarme, ingresa a mi servidor de soporte (https://discord.gg/M35kV5Ez3v)", message.author.displayAvatarURL())
+        .setFooter("Si tienes problemas al invitarme, ingresa a https://discord.gg/M35kV5Ez3v", message.author.displayAvatarURL())
 
         message.channel.send({ embeds: [inviteEmbed] });
     }
