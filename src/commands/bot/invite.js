@@ -16,6 +16,6 @@ export default class extends Command {
         .setTimestamp()
         .setFooter("Si tienes problemas para invitarme, ingresa a mi servidor de soporte (https://discord.gg/M35kV5Ez3v)", message.author.displayAvatarURL())
 
-        message.channel.send(inviteEmbed);
+        message.channel.send({ embeds: [inviteEmbed] });
     }
 }
