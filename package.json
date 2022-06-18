@@ -15,7 +15,6 @@
   "license": "Apache-2.0",
   "type": "module",
   "dependencies": {
-    "ansi-colors": "^4.1.1",
     "discord.js-light": "^4.6.5",
     "dotenv": "^16.0.0",
     "eslint": "^8.12.0",
@@ -23,6 +22,7 @@
     "express": "^4.17.3",
     "fs": "^0.0.1-security",
     "humanize-duration": "^3.27.1",
-    "mongoose": "^6.3.1"
+    "mongoose": "^6.3.1",
+    "twemoji-parser": "^14.0.0"
   }
 }
