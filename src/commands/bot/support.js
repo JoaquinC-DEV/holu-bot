@@ -7,7 +7,7 @@ export default class extends Command {
         this.dev = false;
     }
 
-    async run (bot, message, args) {
+    run (bot, message, args) {
         const supportMessage = `¡Hola, ${message.author.toString()}!\nSi necesitas ayuda con alguna de mis funciones o tienes algún problema o sugerencia que quieras hacerle saber a mi desarrollador, puedes unirte a mi Servidor de soporte.\n\n> https://discord.gg/M35kV5Ez3v`;
 
         message.author.send(supportMessage)

@@ -1,3 +1,4 @@
+// https://github.com/AndreMor8/gidget/blob/master/src/old_commands/image/emojify.js
 export default class extends Command {
     constructor(options) {
         super(options);
@@ -7,7 +8,7 @@ export default class extends Command {
         this.uso = "emojify [emoji/imagen]";
     }
 
-    run (bot, message, args) {
+    async run (bot, message, args) {
         if (!args[1] && !message.attachments.first()) return message.channel.send("Uso: `emojify [emoji/imagen]");
         let url;
         const user = (args[1] || message.mentions.users.first()) ? (message.mentions.users.first() || bot.users.cache.get(args[1]) || bot.users.cache.find(e => (e.username === args.slice(1).join(" ") || e.tag === args.slice(1).join(" ") || e.username?.toLowerCase() === args.slice(1).join(" ")?.toLowerCase() || e.tag?.toLowerCase() === args.slice(1).join(" ")?.toLowerCase())) || message.guild?.members.cache.find(e => (e.nickname === args.slice(1).join(" ") || e.nickname?.toLowerCase() === args.slice(1).join(" ")?.toLowerCase()))?.user || await bot.users.fetch(args[1]).catch(() => { })) : null;

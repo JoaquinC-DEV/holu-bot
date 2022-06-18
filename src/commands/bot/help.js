@@ -14,7 +14,7 @@ export default class extends Command {
         this.uso = "help <categoría/comando>";
     }
 
-    async run (bot, message, args) {
+    run (bot, message, args) {
       const bc = bot.commands;
       const arr = [];
 
