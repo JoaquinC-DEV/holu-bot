@@ -1,7 +1,8 @@
 // https://github.com/AndreMor8/gidget/blob/master/src/old_commands/image/emojify.js
-import { MessageAttachment, MessageButton, MessageActionRow } from 'discord.js-light';
+import discord from 'discord.js-light';
 import mediaExtractor from 'media-extractor';
 import parser from 'twemoji-parser';
+const { MessageAttachment, MessageButton, MessageActionRow } = discord;
 
 export default class extends Command {
     constructor(options) {
