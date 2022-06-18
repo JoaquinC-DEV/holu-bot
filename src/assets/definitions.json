@@ -14,5 +14,9 @@
     "test": {
       "name": "Comandos de prueba",
       "secret": true
+    },
+    "fun": {
+      "name": "Comandos de diversión",
+      "secret": false
     }
 }
