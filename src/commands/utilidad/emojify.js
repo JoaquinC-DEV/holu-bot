@@ -1,8 +1,14 @@
 // https://github.com/AndreMor8/gidget/blob/master/src/old_commands/image/emojify.js
 import discord from 'discord.js-light';
-import mediaExtractor from 'media-extractor';
-import parser from 'twemoji-parser';
 const { MessageAttachment, MessageButton, MessageActionRow } = discord;
+import { fileTypeFromBuffer } from 'file-type';
+import gifResize from '../../utils/gifresize.js';
+import mediaExtractor from 'media-extractor';
+import isSvg from 'is-svg';
+import svg2img_callback from 'node-svg2img';
+import { promisify } from 'util';
+import parser from 'twemoji-parser';
+const svg2img = promisify(svg2img_callback);
 
 export default class extends Command {
     constructor(options) {
@@ -71,5 +77,32 @@ export default class extends Command {
             });
             butcol.on("end", (c, r) => { if (r === "idle") here.edit({ components: [new MessageActionRow().addComponents([but_add.setDisabled(true)])] }) })
         }
+    }
+}
+
+async function render(url) {
+    // eslint-disable-next-line no-undef
+    const res = await fetch(url);
+    if (!res.ok) throw new Error(`Status code returned ${res.status}`);
+    const pre_buf = Buffer.from(await res.arrayBuffer());
+    const type = await fileTypeFromBuffer(pre_buf);
+    if (type?.mime === "image/gif") {
+        const buffer = await gifResize({ width: 48, interlaced: true })(pre_buf);
+        return { pre_type: "gif", buffer };
+    } else if (isSvg(pre_buf)) {
+        return { pre_type: "svg", buffer: await svg2img(pre_buf, { format: "png", width: 48, height: 48 }) };
+    } else if (process.platform === "win32") {
+        //npm i jimp
+        //https://sharp.pixelplumbing.com/install#canvas-and-windows
+        // eslint-disable-next-line import/no-unresolved
+        const Jimp = (await import("jimp")).default;
+        const img = await Jimp.read(pre_buf);
+        img.resize(48);
+        const buffer = await img.getBufferAsync(Jimp.MIME_PNG);
+        return { pre_type: "image", buffer };
+    } else {
+        const sharp = (await import("sharp")).default;
+        const buffer = await sharp(pre_buf).resize(48).png().toBuffer();
+        return { pre_type: "image", buffer };
     }
 }
