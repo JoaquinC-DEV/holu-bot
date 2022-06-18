@@ -5,7 +5,7 @@ export default async (bot, message) => {
     if (message.author.bot) return;
     if (message.guild && !message.channel.permissionsFor(bot.user.id)?.has("SEND_MESSAGES")) return;
 
-    const prefix = "d/";
+    const prefix = bot.config.prefix;
     if (!message.content.startsWith(prefix)) return;
 
     if (message.content.startsWith(prefix)) {
