@@ -4,7 +4,7 @@ export default class extends Command {
     constructor(options) {
         super(options);
         this.aliases = ["profile"];
-        this.uso = "d/perfil <usuario>"
+        this.uso = "perfil <usuario>"
         this.description = "Obtén información de tu perfil o el de otro usuario.";
     }
 
@@ -47,7 +47,7 @@ export default class extends Command {
                     return message.channel.send(`**${message.author.tag}**, ocurrió un error al crear tu perfil: \`${err}\`. Informalo en mi servidor de soporte (comando support)`);
                 });
             } else if (usuario.id === message.author.id) {
-                message.channel.send(`${message.author.toString()}, no tienes un perfil creado... **¿Deseas crearte uno?**\n> Utiliza el comando \`d/perfil crear\`.`);
+                message.channel.send(`${message.author.toString()}, no tienes un perfil creado... **¿Deseas crearte uno?**\n> Utiliza el comando \`${bot.config.prefix}perfil crear\`.`);
             } else {  
                 message.channel.send(`**${usuario.tag}** no tiene un perfil creado...`);
             }

@@ -2,11 +2,11 @@
 export default async (bot) => {
     const presences = [
         [{
-            name: "d/help",
+            name: `${bot.config.prefix}help`,
             type: "PLAYING"
         }],
         [{
-            name: "d/support",
+            name: `${bot.config.prefix}support`,
             type: "PLAYING"
         }]
     ];

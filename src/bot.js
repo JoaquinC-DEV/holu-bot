@@ -64,7 +64,8 @@ const bot = new Discord.Client({
 
 bot.botVersion = "1.0.0";
 bot.config = {
-    color: "#219ebc"
+    color: "#219ebc",
+    prefix: "h/"
 };
 bot.models = {
   profiles
@@ -81,6 +82,7 @@ const logs = new Discord.WebhookClient({
 bot.logs = logs;
 bot.sendLogs = logging;
 
+/* Events and commands */
 (async () => {
     bot.commands = new Discord.Collection();
     bot.cachedMessageReactions = new Discord.Collection();

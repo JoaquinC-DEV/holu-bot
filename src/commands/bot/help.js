@@ -2,7 +2,7 @@ import def from "../../assets/definitions.json";
 import Discord from "discord.js";
 const buttons = [
   new Discord.MessageButton().setLabel("Soporte").setStyle("LINK").setURL("https://discord.gg/M35kV5Ez3v"),
-  new Discord.MessageButton().setLabel("GitHub").setStyle("LINK").setURL("https://github.com/JoaquinC-DEV/diamond-bot"),
+  new Discord.MessageButton().setLabel("GitHub").setStyle("LINK").setURL("https://github.com/JoaquinC-DEV/holu-bot"),
 ];
 const action = Discord.MessageActionRow.prototype.addComponents.apply(new Discord.MessageActionRow(), buttons);
 
@@ -11,7 +11,7 @@ export default class extends Command {
         super(options);
         this.aliases = ["h", "comandos", "commands", "ayuda"];
         this.description = "Comando de ayuda";
-        this.uso = "d/help <categoría/comando>";
+        this.uso = "help <categoría/comando>";
     }
 
     async run (bot, message, args) {
@@ -89,12 +89,12 @@ export default class extends Command {
         const embed = new Discord.MessageEmbed()
           .setThumbnail(bot.user.displayAvatarURL())
           .setColor(bot.config.color)
-          .setTitle("Diamond Bot")
+          .setTitle(`${bot.user.username} Bot`)
           .setDescription(text || "?")
           .setTimestamp();
         message.channel.send({ embeds: [embed], components: [action] });
       } else {
-        const str = `__**Diamond Bot**__\n\n${text}`;
+        const str = `__**${bot.user.username} Bot**__\n\n${text}`;
         message.channel.send({ content: str, components: [action] });
       }
       return;

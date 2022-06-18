@@ -2,7 +2,7 @@ export default class extends Command {
     constructor(options) {
         super(options);
         this.aliases = [];
-        this.uso = "d/setdescription [descripción]"
+        this.uso = "setdescription [descripción]"
         this.description = "Establece una descripción para tu perfil.";
     }
 
