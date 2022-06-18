@@ -15,8 +15,12 @@
       "name": "Comandos de prueba",
       "secret": true
     },
-    "fun": {
+    "diversion": {
       "name": "Comandos de diversión",
+      "secret": false
+    },
+    "utilidad": {
+      "name": "Comandos de utilidad",
       "secret": false
     }
 }

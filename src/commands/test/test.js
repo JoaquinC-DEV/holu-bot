@@ -4,6 +4,7 @@ export default class extends Command {
         this.aliases = ["prueba"];
         this.secret = true;
         this.description = "Este es un comando de prueba";
+        this.uso = "xd";
     }
 
     run (bot, message, args) {
