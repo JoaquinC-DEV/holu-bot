@@ -14,6 +14,8 @@ export default class extends Command {
         if (mensaje.includes("discord.gg/")) return message.channel.send("El mensaje al parecer tiene una invitación... ¡No puedo repetir eso!");
         if (mensaje.length > 2000) return message.channel.send("¡No puedo repetir mensajes tan largos!");
 
+        if (message.deletable) message.delete();
+        
         return message.channel.send(mensaje);
     }
 }
