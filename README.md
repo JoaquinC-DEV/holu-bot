@@ -1,5 +1,5 @@
-# Diamond Bot
-Diamond es un bot de Discord que cuenta con un sistema de economía global, en donde los usuarios de todo Discord pueden interactuar entre sí en un minijuego llamado "economía".
+# Holu Bot
+Holu es un bot de Discord multiproposito.
 El bot, está hecho con un único objetivo: divertir.
 
 Aquí -en este repositorio- encontrarás el código de este bot. Algunas tecnologías que utiliza son las siguientes:
