@@ -2,7 +2,6 @@ export default class extends Command {
     constructor(options) {
         super(options);
         this.aliases = ["decir"];
-        this.secret = false;
         this.description = "Haz que repita lo que digas.";
         this.uso = "say [algo]";
     }

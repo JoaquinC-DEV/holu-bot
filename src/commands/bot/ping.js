@@ -3,6 +3,7 @@ export default class extends Command {
         super(options);
         this.aliases = [];
         this.description = "Obtén información sobre la latencia del bot";
+        this.uso = "ping";
     }
 
     run (bot, message, args) {

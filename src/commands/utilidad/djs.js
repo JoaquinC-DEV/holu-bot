@@ -1,4 +1,5 @@
 import { MessageEmbed } from "discord.js";
+import fetch from "node-fetch";
 export default class extends Command {
   constructor(options) {
     super(options);
@@ -8,6 +9,7 @@ export default class extends Command {
       user: [0n, 0n],
       bot: [0n, 16384n]
     };
+    this.uso = "djs [Function/Class/Typedefs]";
   }
   async run(bot, message, args) {
     if (!args[1]) return message.channel.send("¿Qué es lo que quieres buscar en la documentación de Discord.js?");

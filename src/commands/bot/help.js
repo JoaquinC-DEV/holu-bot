@@ -34,7 +34,7 @@ export default class extends Command {
           const embed = new Discord.MessageEmbed()
           .setThumbnail(bot.user.displayAvatarURL())
           .setColor(bot.config.color)
-          .setTitle(g.category + " (" + g.commands.length + " comandos)")
+          .setTitle(g.category + " (" + g.commands.filter(s => s.secret === false).length + " comandos)")
           .setDescription(Discord.Util.splitMessage(g.commands.filter(s => {
             if (s.secret) return false
             return true
@@ -43,7 +43,7 @@ export default class extends Command {
 
           message.channel.send({ embeds: [embed], components: [new Discord.MessageActionRow().addComponents(buttons[1])] });
       } else {
-        const str = `__**${g.category + " (" + g.commands.length + " comandos)"}**__\n\n${Discord.Util.splitMessage(g.commands.filter(s => {
+        const str = `__**${g.category + " (" + g.commands.filter(s => s.secret === false).length + " comandos)"}**__\n\n${Discord.Util.splitMessage(g.commands.filter(s => {
           if (s.secret) return false;
           if (s.onlyguild && (message.guild ? (message.guild.id !== process.env.GUILD_ID) : true)) return false;
           return true;
@@ -63,7 +63,7 @@ export default class extends Command {
           .setThumbnail(bot.user.displayAvatarURL())
           .setTitle(`Comando "${command.name}"`)
           .addField("Descripción:", command.description ? command.description : "Sin descripción.")
-          .addField("Categoría:", command.category ? command.category : "Sin categoría.")
+          .addField("Categoría:", command.category ? command.category.charAt(0).toUpperCase() + command.category.slice(1) : "Sin categoría.")
           .addField("Uso:", `\`${command.uso}\``)
           .addField("Permisos requeridos:", `Usuario: \`${!(new Discord.Permissions(command.permissions.user[0]).has(8n)) ? (new Discord.Permissions(command.permissions.user[0]).toArray().join(", ") || "Ninguno") : "ADMINISTRATOR"}\`\nBot: \`${!(new Discord.Permissions(command.permissions.bot[0]).has(8n)) ? (new Discord.Permissions(command.permissions.bot[0]).toArray().join(", ") || "Ninguno") : "ADMINISTRATOR"}\``)
           .addField("Permisos requeridos (dentro de un canal)", `Usuario: \`${!(new Discord.Permissions(command.permissions.user[1]).has(8n)) ? (new Discord.Permissions(command.permissions.user[1]).toArray().join(", ") || "Ninguno") : "ADMINISTRATOR"}\`\nBot: \`${!(new Discord.Permissions(command.permissions.bot[1]).has(8n)) ? (new Discord.Permissions(command.permissions.bot[1]).toArray().join(", ") || "Ninguno") : "ADMINISTRATOR"}\``)

@@ -14,7 +14,7 @@ export default class extends Command {
     constructor(options) {
         super(options);
         this.aliases = [];
-        this.secret = false;
+        this.secret = true;
         this.description = "Convierte un emoji normal a gif";
         this.uso = "emojify [emoji/imagen]";
     }

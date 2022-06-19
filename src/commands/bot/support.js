@@ -2,9 +2,8 @@ export default class extends Command {
     constructor(options) {
         super(options);
         this.aliases = ["soporte"];
-        this.secret = false;
         this.description = "Comando de soporte.";
-        this.dev = false;
+        this.uso = "support";
     }
 
     run (bot, message, args) {

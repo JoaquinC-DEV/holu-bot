@@ -4,6 +4,7 @@ export default class extends Command {
         super(options);
         this.aliases = ["invitar"];
         this.description = "Obtén mi URL de invitación.";
+        this.uso = "invite";
     }
 
     run (bot, message, args) {
