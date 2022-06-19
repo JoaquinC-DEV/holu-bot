@@ -1,5 +1,5 @@
 {
-  "name": "diamond-bot",
+  "name": "holu-bot",
   "version": "1.0.0",
   "description": "A Discord bot",
   "main": "src/index.js",
