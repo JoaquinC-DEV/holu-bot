@@ -6,7 +6,7 @@ export default class extends Command {
         this.description = "Cambia el prefix del bot en este servidor.";
         this.uso = "setprefix <prefix>";
         this.permissions = {
-            user: [20n, 0n],
+            user: [5n, 0n],
             bot: [0n, 0n]
         }
     }
