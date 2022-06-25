@@ -1,4 +1,4 @@
-import { setDescription } from "../../extensions";
+import { setDescription } from "../../extensions.js";
 export default class extends Command {
     constructor(options) {
         super(options);
@@ -11,7 +11,7 @@ export default class extends Command {
         const perfil = bot.models.profiles.findOne({ user_id: message.author.id });
 
         if (!perfil) {
-            return message.channel.send(`**${message.author.tag}**, no tienes un perfil creado. Utiliza el comando \`perfil\` y se te creará uno automaticamente. ;)`);
+            return message.channel.send(`**${message.author.tag}**, no tienes un perfil creado. Utiliza el comando \`perfil crear\` para crear el tuyo. ;)`);
         } else {
             const description = args.slice(1).join(" ");
             if (description) {

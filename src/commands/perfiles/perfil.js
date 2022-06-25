@@ -17,9 +17,11 @@ export default class extends Command {
             const embedPerfil = new Discord.MessageEmbed()
             .setTitle(`Perfil de ${usuario.tag}`)
             .setThumbnail(usuario.displayAvatarURL({ dynamic: true }))
+            .addField("Niveles", `Nivel: \`${perfil.profile_lvl}\`.\nXP: \`${perfil.profile_xp}\`.`)
+            .addField("Social", `Estado: \`Soltero/Casado (proximamente)\`.\nAmigos: \`${perfil.profile_friends.length ? `(${perfil.profile_friends.length})` : "No tiene amigos..."}\``)
             .addField("Perfil creado hace", `${duration(perfil.profile_createdAt)}`)
             .setFooter(`${perfil.profile_description || "Sin descripción..."}`)
-            .setColor(bot.config.color);
+            .setColor(perfil.profile_premium ? "GOLD" : bot.config.color);
 
             return message.channel.send({ embeds: [embedPerfil] });
         } else {

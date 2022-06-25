@@ -1,4 +1,4 @@
-import profile from "./database/models/profile";
+import profile from "./database/models/profile.js";
 
 //To differentiate user errors
 class StructureError extends Error {
