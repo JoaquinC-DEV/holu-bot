@@ -40,14 +40,14 @@ export default class extends Command {
           }).map(s => "**" + s.name + "**: " + s.description).join("\n"))[0])
           .setTimestamp();
 
-          message.channel.send({ embeds: [embed], components: [new Discord.MessageActionRow().addComponents(buttons[1])] });
+          message.channel.send({ embeds: [embed], components: [new Discord.MessageActionRow().addComponents(buttons[0])] });
       } else {
         const str = `__**${g.category + " (" + g.commands.filter(s => s.secret === false).length + " comandos)"}**__\n\n${Discord.Util.splitMessage(g.commands.filter(s => {
           if (s.secret) return false;
           if (s.onlyguild && (message.guild ? (message.guild.id !== process.env.GUILD_ID) : true)) return false;
           return true;
         }, { maxLength: 1800 }).map(s => "**" + s.name + "**: " + s.description).join("\n"))[0]}`;
-        message.channel.send({ content: str, components: [new Discord.MessageActionRow().addComponents(buttons[1])] });
+        message.channel.send({ content: str, components: [new Discord.MessageActionRow().addComponents(buttons[0])] });
       }
       return;
     } else if (args[1] && (bot.commands.get(args[1].toLowerCase()) || bot.commands.find(c => c.aliases.includes(args[1].toLowerCase())))) {
