@@ -14,8 +14,8 @@ export default class extends Command {
         this.uso = "help [categoría/comando]";
     }
 
-    run (bot, message, args) {
-      const prefix = getPrefix(message.guild);
+    async run (bot, message, args) {
+      const prefix = await getPrefix(message.guild);
       const bc = bot.commands;
       const arr = [];
 
