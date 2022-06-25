@@ -81,7 +81,7 @@ export default class extends Command {
         return message.channel.send(str);
       }
     } else {
-      const text = "Usa `help <categoría>` para obtener todos los comandos de esa categoría\n\n__**Categorías disponibles:**__\n" + Discord.Util.splitMessage(arr.filter(s => {
+      const text = "Lista de comandos: `help <categoría>`\nInfo. sobre un comando: \`help <comando>\`\n\n__**Categorías disponibles:**__\n" + Discord.Util.splitMessage(arr.filter(s => {
         if (s.secret) return false;
         return true;
       }).map(s => "**" + s.categoryname + "**: " + s.category).join("\n"))[0];

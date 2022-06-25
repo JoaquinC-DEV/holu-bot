@@ -1,26 +1,26 @@
 {
     "bot": {
-      "name": "Comandos de información sobre el bot",
+      "name": "Bot",
       "secret": false
     },
     "dev": {
-      "name": "Comandos de desarrollador",
+      "name": "Desarrollador",
       "secret": true
     },
-    "perfiles": {
-      "name": "Comandos de los perfiles globales",
+    "profiles": {
+      "name": "Perfiles",
       "secret": false
     },
     "test": {
-      "name": "Comandos de prueba",
+      "name": "Pruebas",
       "secret": true
     },
-    "diversion": {
-      "name": "Comandos de diversión",
+    "fun": {
+      "name": "Diversión",
       "secret": false
     },
-    "utilidad": {
-      "name": "Comandos de utilidad",
+    "utility": {
+      "name": "Utilidades",
       "secret": false
     }
 }
