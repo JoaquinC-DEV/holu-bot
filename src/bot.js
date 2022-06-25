@@ -20,8 +20,6 @@ const bot = new Discord.Client({
         ApplicationCommandManager: 0,
         BaseGuildEmojiManager: 0,
         GuildEmojiManager: 0,
-        ChannelManager: Infinity,
-        GuildChannelManager: Infinity,
         GuildBanManager: 0,
         GuildInviteManager: 0,
         GuildManager: Infinity,
