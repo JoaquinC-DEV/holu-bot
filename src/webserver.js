@@ -1,16 +1,16 @@
-import express from "express";
-import profiles from "./database/models/profile.js";
+import express from 'express';
 
 export default function (sharder) {
     const app = express();
-
-    app.get("/", (req, res) => {
-        res.send("Aquí está todo bien...");
-    });
-
     app.get("/ping", (req, res) => {
-        res.send("Hi!");
+        res.status(200).send("Good!");
     });
+
+    /* app.use((req, res, next) => {
+        if (req.headers["pass"] !== process.env.ACCESS) {
+        res.status(200).send("You don't have authorization");
+        } else next();
+    }); */
 
     app.get("/guilds", async (req, res) => {
         const servers = await sharder.broadcastEval(c => c.guilds.cache.map(e => e.id));
@@ -18,25 +18,39 @@ export default function (sharder) {
         return res.json(merged);
     });
 
-    /* F
-    app.get("/profiles/:profileID", async (req, res) => {
-        if (isNaN(req.params.profileID) && req.params.profileID.length !== 18) {
-            res.status(400).send("La sintaxis de la ID está mal...");
-        } else {
-            const profile = await profiles.findOne({ user_id: req.params.profileID });
-            if (profile) {
-                res.send({
-                    user_id: profile.user_id,
-                    profile_description: profile.description
-                });
+    app.get("/", async (req, res) => {
+        try {
+            const todelete = req.query["delete"];
+            if (todelete) {
+                const post = await deleteCache(todelete);
+                if (post) res.status(200).send("Good.")
+                else res.status(404).send("Something's bad. Maybe server ID doesn't exist");
             } else {
-                res.status(404).send("Perfil no encontrado...");
+                res.status(200).send("Specify a server!");
             }
+        } catch (err) {
+            console.log(err);
+            res.status(500).send("Something happened! " + err);
         }
     });
-    */
 
     const listener = app.listen(process.env.PORT, () => {
-        console.log("Express server listening in port " + listener.address().port);
+        console.log("Your app is listening on port " + listener.address().port);
     });
+
+  async function deleteCache(guildID) {
+    if (isNaN(guildID)) return false;
+    const res = await sharder.broadcastEval((c, { g }) => {
+      function guildNoCache(guild) {
+        if (!guild) return false;
+        if (!guild.cache) guild.cache = {};
+        guild.cache.prefix = false;
+        guild.prefix = {};
+        return true;
+      }
+      return guildNoCache(c.guilds.cache.get(g));
+    }, { context: { g: guildID } });
+    if (res.find(e => Boolean(e))) return true;
+    else return false;
+  }
 }
