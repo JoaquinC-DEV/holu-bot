@@ -18,9 +18,9 @@ export default function (sharder) {
         return res.json(merged);
     });
 
-    app.get("/", async (req, res) => {
+    app.get("/guild/:guildID/delete", async (req, res) => {
         try {
-            const todelete = req.query["delete"];
+            const todelete = req.params.guildID;
             if (todelete) {
                 const post = await deleteCache(todelete);
                 if (post) res.status(200).send("Good.")
