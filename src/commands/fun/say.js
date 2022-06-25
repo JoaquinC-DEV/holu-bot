@@ -3,7 +3,7 @@ export default class extends Command {
         super(options);
         this.aliases = ["decir"];
         this.description = "Haz que repita lo que digas.";
-        this.uso = "say [algo]";
+        this.uso = "say <texto>";
     }
 
     run (bot, message, args) {

@@ -3,8 +3,8 @@ import duration from "../../utils/humanize.js";
 export default class extends Command {
     constructor(options) {
         super(options);
-        this.aliases = ["profile"];
-        this.uso = "perfil <usuario>"
+        this.aliases = ["perfil"];
+        this.uso = "profile [usuario]"
         this.description = "Obtén información de tu perfil o el de otro usuario.";
     }
 

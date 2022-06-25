@@ -10,7 +10,7 @@ export default class extends Command {
         super(options);
         this.aliases = ["h", "comandos", "commands", "ayuda"];
         this.description = "Comando de ayuda";
-        this.uso = "help <categoría/comando>";
+        this.uso = "help [categoría/comando]";
     }
 
     run (bot, message, args) {
@@ -59,16 +59,17 @@ export default class extends Command {
       }
       if (checkEmbed(message.channel)) {
         const embed = new Discord.MessageEmbed()
-          .setThumbnail(bot.user.displayAvatarURL())
-          .setTitle(`Comando "${command.name}"`)
-          .addField("Descripción:", command.description ? command.description : "Sin descripción.")
-          .addField("Categoría:", command.category ? command.category.charAt(0).toUpperCase() + command.category.slice(1) : "Sin categoría.")
-          .addField("Uso:", `\`${command.uso}\``)
-          .addField("Permisos requeridos:", `Usuario: \`${!(new Discord.Permissions(command.permissions.user[0]).has(8n)) ? (new Discord.Permissions(command.permissions.user[0]).toArray().join(", ") || "Ninguno") : "ADMINISTRATOR"}\`\nBot: \`${!(new Discord.Permissions(command.permissions.bot[0]).has(8n)) ? (new Discord.Permissions(command.permissions.bot[0]).toArray().join(", ") || "Ninguno") : "ADMINISTRATOR"}\``)
-          .addField("Permisos requeridos (dentro de un canal)", `Usuario: \`${!(new Discord.Permissions(command.permissions.user[1]).has(8n)) ? (new Discord.Permissions(command.permissions.user[1]).toArray().join(", ") || "Ninguno") : "ADMINISTRATOR"}\`\nBot: \`${!(new Discord.Permissions(command.permissions.bot[1]).has(8n)) ? (new Discord.Permissions(command.permissions.bot[1]).toArray().join(", ") || "Ninguno") : "ADMINISTRATOR"}\``)
-          .addField("Aliases", alias)
-          .setColor(bot.config.color)
-          .setTimestamp();
+        .setTitle(`Comando ${command.name}`)
+        .setDescription(command.description ? command.description : "Sin descripción.")
+        .setThumbnail(bot.user.displayAvatarURL())
+        .addField("Categoría", command.category ? command.category.charAt(0).toUpperCase() + command.category.slice(1) : "Sin categoría.")
+        .addField("Uso", `\`${command.uso}\``)
+        .addField("Aliases", alias)
+        .addField("Permisos requeridos:", `Usuario: \`${!(new Discord.Permissions(command.permissions.user[0]).has(8n)) ? (new Discord.Permissions(command.permissions.user[0]).toArray().join(", ") || "Ninguno") : "ADMINISTRATOR"}\`\nBot: \`${!(new Discord.Permissions(command.permissions.bot[0]).has(8n)) ? (new Discord.Permissions(command.permissions.bot[0]).toArray().join(", ") || "Ninguno") : "ADMINISTRATOR"}\``)
+        .setColor(bot.config.color)
+        .setFooter("Sintaxis: <obligatorio> [opcional]")
+        .setTimestamp();
+        
         message.channel.send({ embeds: [embed] });
       } else {
         const perms = `Usuario: \`${!(new Discord.Permissions(command.permissions.user[0]).has(8n)) ? (new Discord.Permissions(command.permissions.user[0]).toArray().join(", ") || "Ninguno") : "ADMINISTRATOR"}\`\nBot: \`${!(new Discord.Permissions(command.permissions.bot[0]).has(8n)) ? (new Discord.Permissions(command.permissions.bot[0]).toArray().join(", ") || "Ninguno") : "ADMINISTRATOR"}\``;
