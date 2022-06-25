@@ -1,4 +1,5 @@
 import def from "../../assets/definitions.json";
+import { getPrefix } from "../../extensions.js";
 import Discord from "discord.js";
 const buttons = [
   new Discord.MessageButton().setLabel("Soporte").setStyle("LINK").setURL("https://discord.gg/M35kV5Ez3v")
@@ -14,6 +15,7 @@ export default class extends Command {
     }
 
     run (bot, message, args) {
+      const prefix = getPrefix(message.guild);
       const bc = bot.commands;
       const arr = [];
 
@@ -37,7 +39,7 @@ export default class extends Command {
           .setDescription(Discord.Util.splitMessage(g.commands.filter(s => {
             if (s.secret) return false
             return true
-          }).map(s => "**" + s.name + "**: " + s.description).join("\n"))[0])
+          }).map(s => `${prefix}**${s.name}**: ${s.description}`).join("\n"))[0])
           .setTimestamp();
 
           message.channel.send({ embeds: [embed], components: [new Discord.MessageActionRow().addComponents(buttons[0])] });
@@ -46,7 +48,7 @@ export default class extends Command {
           if (s.secret) return false;
           if (s.onlyguild && (message.guild ? (message.guild.id !== process.env.GUILD_ID) : true)) return false;
           return true;
-        }, { maxLength: 1800 }).map(s => "**" + s.name + "**: " + s.description).join("\n"))[0]}`;
+        }, { maxLength: 1800 }).map(`${prefix}**${s.name}**: ${s.description}`).join("\n"))[0]}`;
         message.channel.send({ content: str, components: [new Discord.MessageActionRow().addComponents(buttons[0])] });
       }
       return;
@@ -63,7 +65,7 @@ export default class extends Command {
         .setDescription(command.description ? command.description : "Sin descripción.")
         .setThumbnail(bot.user.displayAvatarURL())
         .addField("Categoría", command.category ? command.category.charAt(0).toUpperCase() + command.category.slice(1) : "Sin categoría.")
-        .addField("Uso", `\`${command.uso}\``)
+        .addField("Uso", `\`${prefix}${command.uso}\``)
         .addField("Aliases", alias)
         .addField("Permisos requeridos:", `Usuario: \`${!(new Discord.Permissions(command.permissions.user[0]).has(8n)) ? (new Discord.Permissions(command.permissions.user[0]).toArray().join(", ") || "Ninguno") : "ADMINISTRATOR"}\`\nBot: \`${!(new Discord.Permissions(command.permissions.bot[0]).has(8n)) ? (new Discord.Permissions(command.permissions.bot[0]).toArray().join(", ") || "Ninguno") : "ADMINISTRATOR"}\``)
         .setColor(bot.config.color)
@@ -81,16 +83,17 @@ export default class extends Command {
         return message.channel.send(str);
       }
     } else {
-      const text = "Lista de comandos: `help <categoría>`\nInfo. sobre un comando: \`help <comando>\`\n\n__**Categorías disponibles:**__\n" + Discord.Util.splitMessage(arr.filter(s => {
+      const text = "Lista de comandos: `" + prefix + "help <categoría>`\nInfo. sobre un comando: \`" + prefix + "help <comando>\`\n\n__**Categorías disponibles:**__\n" + Discord.Util.splitMessage(arr.filter(s => {
         if (s.secret) return false;
         return true;
-      }).map(s => "`help " + s.categoryname + "`・" + s.category).join("\n"))[0];
+      }).map(s => `\`${prefix}help ${s.categoryname}\`・${s.category}`).join("\n"))[0];
       if (checkEmbed(message.channel)) {
         const embed = new Discord.MessageEmbed()
         .setTitle(`Mis comandos`)
         .setThumbnail(bot.user.displayAvatarURL())
         .setColor(bot.config.color)
         .setDescription(text || "?")
+        .setFooter(`Prefix en este servidor: ${prefix}`)
         .setTimestamp();
 
         message.channel.send({ embeds: [embed], components: [action] });

@@ -22,5 +22,9 @@
     "utility": {
       "name": "Utilidades",
       "secret": false
+    },
+    "config": {
+      "name": "Configuración",
+      "secret": false
     }
 }

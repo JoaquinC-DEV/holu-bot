@@ -1,11 +1,13 @@
-const internalCooldown = new Set();
 import Discord from "discord.js-light";
+import { getPrefix } from "../../extensions.js";
+
+const internalCooldown = new Set();
 
 export default async (bot, message) => {
     if (message.author.bot) return;
     if (message.guild && !message.channel.permissionsFor(bot.user.id)?.has("SEND_MESSAGES")) return;
 
-    const prefix = bot.config.prefix;
+    const prefix = message.guild ? await getPrefix(message.guild) : "h!";
     if (!message.content.startsWith(prefix)) return;
 
     if (message.content.startsWith(prefix)) {
@@ -20,7 +22,7 @@ export default async (bot, message) => {
             await message.channel.fetch({ cache: true }).catch(() => { });
             await message.member?.fetch({ cache: true }).catch(() => { });
             
-            if (command.owner && message.author.id !== "883720498272403516") return message.reply("Solo J. puede usar este comando...");
+            if (command.owner && message.author.id !== "883720498272403516") return message.reply("Solo Jko puede usar este comando...");
             if (command.dev && message.author.id !== "883720498272403516") {
                 if (!process.env.DEVS.split(",").includes(message.author.id)) return message.reply("Solo mis desarrolladores pueden usar este comando...");
             }

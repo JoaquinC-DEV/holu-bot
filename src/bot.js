@@ -65,7 +65,7 @@ const bot = new Discord.Client({
 bot.botVersion = "1.0.0";
 bot.config = {
     color: "#219ebc",
-    prefix: "h/"
+    prefix: "h!"
 };
 bot.models = {
   profiles
