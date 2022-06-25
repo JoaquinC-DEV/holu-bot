@@ -1,3 +1,4 @@
+import { setDescription } from "../../extensions";
 export default class extends Command {
     constructor(options) {
         super(options);
@@ -14,9 +15,9 @@ export default class extends Command {
         } else {
             const description = args.slice(1).join(" ");
             if (description) {
-                perfil.updateOne({
-                    profile_description: description
-                })
+                if (description === perfil.profile_description) return message.channel.send(`**${message.author.tag}**, la nueva descripción es idéntica a tu descripción actual.`);
+
+                setDescription(message.author, description)
                 .then(() => message.channel.send(`**${message.author.tag}**, la descripción de tu perfil fue actualizada correctamente...`))
                 .catch((err) => message.channel.send(`**${message.author.tag}**, ocurrió un error al intentar actualizar la descripción de tu perfil...\n \`${err}\``));
 
