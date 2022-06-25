@@ -27,7 +27,6 @@ const bot = new Discord.Client({
         GuildManager: Infinity,
         GuildMemberManager: Infinity,
         GuildStickerManager: 0,
-        MessageManager: 20,
         PermissionOverwriteManager: Infinity,
         PresenceManager: 0,
         ReactionManager: 0,

@@ -6,11 +6,11 @@ export default function (sharder) {
         res.status(200).send("Good!");
     });
 
-    /* app.use((req, res, next) => {
+    app.use((req, res, next) => {
         if (req.headers["pass"] !== process.env.ACCESS) {
         res.status(200).send("You don't have authorization");
         } else next();
-    }); */
+    });
 
     app.get("/guilds", async (req, res) => {
         const servers = await sharder.broadcastEval(c => c.guilds.cache.map(e => e.id));
