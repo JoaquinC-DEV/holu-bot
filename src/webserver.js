@@ -12,6 +12,12 @@ export default function (sharder) {
         res.send("Hi!");
     });
 
+    app.get("/guilds", async (req, res) => {
+        const servers = await sharder.broadcastEval(c => c.guilds.cache.map(e => e.id));
+        const merged = Array.prototype.concat.apply([], servers);
+        return res.json(merged);
+    });
+
     /* F
     app.get("/profiles/:profileID", async (req, res) => {
         if (isNaN(req.params.profileID) && req.params.profileID.length !== 18) {
