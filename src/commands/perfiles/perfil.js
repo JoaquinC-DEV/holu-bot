@@ -15,10 +15,10 @@ export default class extends Command {
 
         if (perfil) {
             const embedPerfil = new Discord.MessageEmbed()
-            .setTitle(`Perfil de ${usuario.tag}`)
+            .setTitle(`Perfil de ${usuario.tag} ${perfil.profile_premium ? "(💎)" : ""}`)
             .setThumbnail(usuario.displayAvatarURL({ dynamic: true }))
-            .addField("Niveles", `🌟 Nivel: \`${perfil.profile_lvl} (${perfil.profile_xp})\`.\n👑 Top: \`Próximamente...\`.`)
-            .addField("Social", `💍 Estado: \`Soltero/Casado (proximamente)\`.\n👤 Amigos: \`${perfil.profile_friends.length ? `(${perfil.profile_friends.length})` : "No tiene amigos..."}\``)
+            .addField("Niveles", `🌟 Nivel: \`${perfil.profile_lvl} (${perfil.profile_xp} XP)\`\n👑 Top: \`Próximamente...\``)
+            .addField("Social", `💍 Estado: \`Soltero/Casado (proximamente)\`\n👤 Amigos: \`${perfil.profile_friends.length ? `(${perfil.profile_friends.length})` : "No tiene amigos..."}\``)
             .setFooter(`Perfil creado hace ${duration(perfil.profile_createdAt)}`)
             .setColor(perfil.profile_premium ? "GOLD" : bot.config.color);
 
