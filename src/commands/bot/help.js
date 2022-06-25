@@ -1,8 +1,7 @@
 import def from "../../assets/definitions.json";
 import Discord from "discord.js";
 const buttons = [
-  new Discord.MessageButton().setLabel("Soporte").setStyle("LINK").setURL("https://discord.gg/M35kV5Ez3v"),
-  new Discord.MessageButton().setLabel("GitHub").setStyle("LINK").setURL("https://github.com/JoaquinC-DEV/holu-bot"),
+  new Discord.MessageButton().setLabel("Soporte").setStyle("LINK").setURL("https://discord.gg/M35kV5Ez3v")
 ];
 const action = Discord.MessageActionRow.prototype.addComponents.apply(new Discord.MessageActionRow(), buttons);
 
@@ -84,14 +83,15 @@ export default class extends Command {
       const text = "Lista de comandos: `help <categoría>`\nInfo. sobre un comando: \`help <comando>\`\n\n__**Categorías disponibles:**__\n" + Discord.Util.splitMessage(arr.filter(s => {
         if (s.secret) return false;
         return true;
-      }).map(s => "**" + s.categoryname + "**: " + s.category).join("\n"))[0];
+      }).map(s => "`help " + s.categoryname + "`・" + s.category).join("\n"))[0];
       if (checkEmbed(message.channel)) {
         const embed = new Discord.MessageEmbed()
-          .setThumbnail(bot.user.displayAvatarURL())
-          .setColor(bot.config.color)
-          .setTitle(`${bot.user.username} Bot`)
-          .setDescription(text || "?")
-          .setTimestamp();
+        .setTitle(`Mis comandos`)
+        .setThumbnail(bot.user.displayAvatarURL())
+        .setColor(bot.config.color)
+        .setDescription(text || "?")
+        .setTimestamp();
+
         message.channel.send({ embeds: [embed], components: [action] });
       } else {
         const str = `__**${bot.user.username} Bot**__\n\n${text}`;
