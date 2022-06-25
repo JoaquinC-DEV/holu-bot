@@ -48,7 +48,7 @@ export default class extends Command {
           if (s.secret) return false;
           if (s.onlyguild && (message.guild ? (message.guild.id !== process.env.GUILD_ID) : true)) return false;
           return true;
-        }, { maxLength: 1800 }).map(`${prefix}**${s.name}**: ${s.description}`).join("\n"))[0]}`;
+        }, { maxLength: 1800 }).map(s => `${prefix}**${s.name}**: ${s.description}`).join("\n"))[0]}`;
         message.channel.send({ content: str, components: [new Discord.MessageActionRow().addComponents(buttons[0])] });
       }
       return;

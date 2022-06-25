@@ -6,11 +6,11 @@ export default class extends Command {
         this.description = "Haz una pregunta a la bola mágica.";
         this.uso = "8ball <pregunta>";
     }
-    run (bot, message, args) {
+    async run (bot, message, args) {
         if (!args[1]) return message.channel.send("Te faltó la pregunta...");
 
         const pregunta = args.slice(1).join(" ");
-        if (mensaje.length > 1000) return message.channel.send("¡La pregunta es muy larga!");
+        if (pregunta.length > 1000) return message.channel.send("¡La pregunta es muy larga!");
         
         const arr = [
             "Puede ser...",
@@ -42,7 +42,7 @@ export default class extends Command {
         .setStyle("PRIMARY")
         .setLabel("Repetir");
 
-        const msg = await message.channel.send({ embeds: [ballembed], components: [new Discord.MessageActionRow().addComponents([butRetry])] });
+        const msg = await message.channel.send({ embeds: [ballEmbed], components: [new Discord.MessageActionRow().addComponents([butRetry])] });
 
         const filter = (button) => {
             if (button.user.id !== message.author.id) button.reply({ content: "¡Haz tu propia pregunta usando el comando 8ball!", ephemeral: true });
@@ -52,7 +52,7 @@ export default class extends Command {
         const col = msg.createMessageComponentCollector({ filter, idle: 15000 });
         col.on("collect", async (button) => {
             if (button.customId === "8ball_c_redo") {
-                await button.update({ embeds: [ballembed.spliceFields(1, 1).addField("Respuesta:", arr[Math.floor(Math.random() * arr.length)])] });
+                await button.update({ embeds: [ballEmbed.spliceFields(1, 1).addField("Respuesta:", arr[Math.floor(Math.random() * arr.length)])] });
             }
         });
         col.on("end", () => msg.edit({ components: [new Discord.MessageActionRow().addComponents([butRetry.setDisabled(true)])] }));
